@@ -1,7 +1,7 @@
 NYC-Taxi
 ==============================
 
-Machine learning project to predict trip duration for s in NewYork city.
+Machine learning project to predict trip duration for taxis in NewYork city.
 
 Project Organization
 ------------
