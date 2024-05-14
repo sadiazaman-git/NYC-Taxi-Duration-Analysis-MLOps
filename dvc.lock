@@ -126,3 +126,26 @@ stages:
       md5: 3ebd6f09d06ab0a98ba6f1edae85a60c.dir
       size: 6399
       nfiles: 3
+  train_model:
+    cmd: python ./src/models/train_model.py data/processed/final/train.csv
+    deps:
+    - path: ./data/processed/final/train.csv
+      hash: md5
+      md5: 91852d465266a77b227b575ccd885959
+      size: 227804194
+    - path: ./src/models/train_model.py
+      hash: md5
+      md5: da39d3b2bdd9b4cc403623531c97a79b
+      size: 1715
+    params:
+      params.yaml:
+        train_model.random_forest_regressor.max_depth: 6
+        train_model.random_forest_regressor.n_estimators: 50
+        train_model.random_forest_regressor.n_jobs: -1
+        train_model.random_forest_regressor.verbose: 2
+    outs:
+    - path: ./models/models
+      hash: md5
+      md5: 9153f93fc491b1b067f93ca72be7730d.dir
+      size: 474721
+      nfiles: 1
