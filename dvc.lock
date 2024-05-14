@@ -91,3 +91,38 @@ stages:
       md5: 483998e69397390511a5c266ce57a077.dir
       size: 328946482
       nfiles: 3
+  data_preprocessing:
+    cmd: python ./src/features/data_preprocessing.py train.csv val.csv test.csv
+    deps:
+    - path: ./data/processed/build-features/test.csv
+      hash: md5
+      md5: be704014be8cb7eb7f88a241c8fc3071
+      size: 92630735
+    - path: ./data/processed/build-features/train.csv
+      hash: md5
+      md5: 88e5fd6a9cf2c3f1eb0ab285e2792f12
+      size: 212678166
+    - path: ./data/processed/build-features/val.csv
+      hash: md5
+      md5: fb2c29ab476932dc8746108f0b29597e
+      size: 23637581
+    - path: ./src/features/data_preprocessing.py
+      hash: md5
+      md5: 910ed86b4e3c1f75a3c3dfb60753c936
+      size: 7253
+    params:
+      params.yaml:
+        data_preprocessing.percentiles:
+        - 0.002
+        - 0.998
+    outs:
+    - path: ./data/processed/final
+      hash: md5
+      md5: bc127befe7671c39410b454e424c8178.dir
+      size: 349489751
+      nfiles: 3
+    - path: ./models/transformers
+      hash: md5
+      md5: 3ebd6f09d06ab0a98ba6f1edae85a60c.dir
+      size: 6399
+      nfiles: 3
