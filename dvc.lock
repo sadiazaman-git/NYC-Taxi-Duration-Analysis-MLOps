@@ -39,3 +39,29 @@ stages:
       md5: 7f670a515defe82553d40117c288d0a0.dir
       size: 195532592
       nfiles: 2
+  modify_features:
+    cmd: python ./src/features/modify_features.py data/interim/train.csv data/interim/val.csv
+      data/raw/extracted/test.csv
+    deps:
+    - path: ./data/interim/train.csv
+      hash: md5
+      md5: e25e5b87df39b21af60784835bdeb1c4
+      size: 175979754
+    - path: ./data/interim/val.csv
+      hash: md5
+      md5: ab4d5d49f0c0acf9bb71b470dced9de4
+      size: 19552838
+    - path: ./data/raw/extracted/test.csv
+      hash: md5
+      md5: 0686e4fc98617485dba9fdbabbf1c48d
+      size: 70794289
+    - path: ./src/features/modify_features.py
+      hash: md5
+      md5: e149b9d5965682388bab513da9d91ea0
+      size: 8826
+    outs:
+    - path: ./data/processed/transformations
+      hash: md5
+      md5: bcb8f230135360ad5a3b749d67d4da6c.dir
+      size: 206183587
+      nfiles: 3
