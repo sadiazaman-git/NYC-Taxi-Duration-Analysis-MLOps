@@ -70,3 +70,6 @@ stages:
       - ./src/models/predict_model.py
       - ./data/processed/final/val.csv
       - ./models/models
+    metrics:
+      - metrics.json:
+          cache: false

@@ -2,8 +2,11 @@ import joblib
 import sys
 import pandas as pd
 from yaml import safe_load
-from sklearn.ensemble import RandomForestRegressor
 from pathlib import Path
+from xgboost import XGBRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.linear_model import LinearRegression
+
 
 
 TARGET = 'trip_duration'
@@ -50,17 +53,21 @@ def main():
     # read the parameters from params.yaml
     with open('params.yaml') as f:
         params = safe_load(f)
-    model_params = params['train_model']['random_forest_regressor']
-    # make the model object
-    regressor = RandomForestRegressor(**model_params)
-    # train the model
-    regressor = train_model(model=regressor,
-                            X_train=X_train,
-                            y_train=y_train)
-    # save the model after training
-    model_output_path = root_path / 'models' / 'models'
+
+    # Create a dictionary to store models
+    models = {
+        'random_forest': RandomForestRegressor(**params['train_model']['random_forest_regressor']),
+        'xgboost': XGBRegressor(**params['train_model']['xgboost']),
+        'gradient_boosting': GradientBoostingRegressor(**params['train_model']['gradient_boosting_regressor']),
+        'linear_regression': LinearRegression()
+    }
+    # Train and save each model
+    model_output_path = root_path / 'models'/ 'models'
     model_output_path.mkdir(exist_ok=True)
-    save_model(model=regressor,save_path=model_output_path / 'rf.joblib')
+
+    for model_name, model in models.items():
+        trained_model = train_model(model=model, X_train=X_train, y_train=y_train)
+        save_model(model=trained_model, save_path=model_output_path / f'{model_name}.joblib')
 
 
 if __name__ == "__main__":

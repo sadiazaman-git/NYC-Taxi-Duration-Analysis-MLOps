@@ -1,0 +1,10 @@
+{
+    "random_forest_train_r2": 0.7000057959882968,
+    "xgboost_train_r2": 0.7629857032067864,
+    "gradient_boosting_train_r2": 0.72230325697086,
+    "linear_regression_train_r2": 0.3998384919952067,
+    "random_forest_val_r2": 0.698526135738251,
+    "xgboost_val_r2": 0.7606148872889804,
+    "gradient_boosting_val_r2": 0.7211093051140078,
+    "linear_regression_val_r2": 0.45273667238679793
+}
