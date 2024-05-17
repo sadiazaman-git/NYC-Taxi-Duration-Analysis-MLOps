@@ -73,3 +73,10 @@ stages:
     metrics:
       - metrics.json:
           cache: false
+  visualize:
+    cmd: python src/visualization/visualize.py
+    deps:
+      - src/visualization/visualize.py
+      - metrics.json
+    outs:
+      - src/visualization/plots/bar_plot.png
