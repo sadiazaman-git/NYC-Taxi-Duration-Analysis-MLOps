@@ -1,0 +1,41 @@
+name: CI using CML
+
+on: 
+    push
+
+jobs:
+    build:
+        name: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Install Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.11'
+
+            - uses: iterative/setup-cml@v2
+
+            - name: Install Dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements-actions.txt
+            - name: Run DVC
+              run: dvc repro
+                
+
+
+            - name: Create CML Report
+              env:
+                REPO_TOKEN: ${{ secrets.CML_SECRET }} 
+              run: |
+                git fetch --prune
+                dvc metrics diff --show-md master > report.md
+
+                #Add figures to the report
+                echo "# Model Evalutaion Results" >> report.md
+                echo "## Bar Graph of Models" >> report.md
+                echo "![](./src/visualization/plots/bar_plot.png)" >> report.md
+                cml comment create report.md
