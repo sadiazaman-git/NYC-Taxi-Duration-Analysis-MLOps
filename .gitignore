@@ -89,3 +89,5 @@ target/
 
 #env
 .venv/
+/file
+Credentials.json
